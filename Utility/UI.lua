@@ -1,5 +1,7 @@
 -- // credit to whoever made this, couldn't find who made it. Slightly changed some of the code.
-game.Loaded:Wait()
+if not game:IsLoaded() then
+	game.Loaded:Wait()
+end
 local GetService = cloneref or function(...) return ... end
 local library = {}
 local pages = {}
