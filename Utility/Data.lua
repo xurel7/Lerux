@@ -1,5 +1,5 @@
 local module = {
-  ["Version"] = "alpha",
+  ["Version"] = "Alpha",
   ["Invite"] = "discord.gg/nil"
 }
 
