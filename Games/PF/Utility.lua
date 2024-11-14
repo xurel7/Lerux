@@ -30,7 +30,7 @@ end
 function module.getBodypart(Character: Model, Bodypart: string): BasePart
   local Target = Bodyparts[Bodypart] or Bodyparts["Head"]
   for _, Part in ipairs(Character:GetChildren()) do
-    if Part:IsA("SpecialMesh") and string.find(Part.MeshId, Target) then
+    if Part:IsA("SpecialMesh") and Part.MeshId == Target then
       return Part
     end
   end
