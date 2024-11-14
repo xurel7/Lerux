@@ -30,8 +30,12 @@ end
 function module.getBodypart(Character: Model, Bodypart: string): BasePart
   local Target = Bodyparts[Bodypart] or Bodyparts["Head"]
   for _, Part in ipairs(Character:GetChildren()) do
-    if Part:IsA("SpecialMesh") and Part.MeshId == Target then
-      return Part
+    local SpecialMesh = Part:FindFirstChildOfClass("SpecialMesh")
+    if not SpecialMesh then
+        continue
+    end
+    if SpecialMesh.MeshId == Target then
+        return Part
     end
   end
 end
