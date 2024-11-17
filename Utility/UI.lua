@@ -972,6 +972,7 @@ function library:page(props)
 			Size = UDim2.new(1,-20,1,-20),
 			Position = UDim2.new(0.5,0,0.5,0),
 			Visible = false,
+			ClipsDescendants = true,
 			Parent = self.tabs
 		}
 	)
