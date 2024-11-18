@@ -44,7 +44,7 @@ end
 function module.getLightingVal(component: string): {[string]: any}
   local MapLighting = Lighting:FindFirstChild("MapLighting")
   if not MapLighting then
-    return 0
+    return {}
   end
   local request = LightingTypes[component]
   local Values = {}
