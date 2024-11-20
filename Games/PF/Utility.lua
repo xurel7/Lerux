@@ -135,6 +135,37 @@ module.addESPtoModel({
 })
 ]]
 
+function module.updateESP(tbl: {string: any})
+  for i, v in ipairs(Parent:GetChildren()) do
+    if v:IsA("Highlight") then
+      v.FillColor = tbl["FillColor"]
+      v.FillTransparency = tbl["FillTransparency"]
+      v.OutlineColor = tbl["OutlineColor"]
+      v.OutlineTransparency = tbl["OutlineTransparency"]
+    end
+    if v:IsA("BillboardGui") then
+      local indicator = v:GetChildren()[1]
+      if not indicator then
+        continue
+      end
+      indicator.BackgroundColor3 = tbl["IndicatorColor"]
+      indicator.BackgroundTransparency = tbl["IndicatorTransparency"]
+    end
+  end
+end
+
+--[[
+module.updateESP({
+  ["Parent"]  = Folder,
+  ["FillColor"] = Color3,
+  ["OutlineColor"] = Color3,
+  ["IndicatorColor"] = Color3,
+  ["FillTransparency"] = number,
+  ["OutlineTransparency"] = number,
+  ["IndicatorTransparency"] = number,
+})
+]]
+
 function module.targetPlr(tbl: {string: any})
   local Fill = tbl["FOV"]:GetChildren()[1]
   local Outline = Fill.UIStroke
