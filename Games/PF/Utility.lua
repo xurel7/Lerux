@@ -166,7 +166,7 @@ module.addESPtoModel({
 ]]
 
 function module.updateESP(tbl: {string: any})
-  for i, v in ipairs(Parent:GetChildren()) do
+  for i, v in ipairs(tbl["Parent"]:GetChildren()) do
     if v:IsA("Highlight") then
       v.FillColor = tbl["FillColor"]
       v.FillTransparency = tbl["FillTransparency"]
