@@ -19,36 +19,17 @@ local Bodyparts = {
   ["Torso"] = "rbxassetid://4049240078"
 }
 
-local LightingTypes = {
-  ["Ambient"] = {
-    "Ambient",
-    "OutdoorAmbient",
-  },
-  ["Colorshift"] = {
-    "ColorShift_Bottom",
-    "ColorShift_Top",
-  },
-  ["ShadowSoftness"] = {
-    "ShadowSoftness"
-  },
-  ["EnviromentScale"] = {
-    "EnvironmentDiffuseScale",
-    "EnvironmentSpecularScale",
-  }
-}
-
 function module.getMouseSens()
   return UserGameSettings.MouseSensitivity + 0.1 or 0.3 -- slight padding to prevent jittering on 0 smoothing
 end
 
-function module.getLightingVal(component: string): {[string]: any}
+function module.getLightingVal(properties: {string}): {[string]: any}
+  local Values = {}
   local MapLighting = Lighting:FindFirstChild("MapLighting")
   if not MapLighting then
-    return {}
+    return
   end
-  local request = LightingTypes[component]
-  local Values = {}
-  for i, v in ipairs(request) do
+  for i, v in ipairs(properties) do
     Values[v] = MapLighting[v].Value
   end
   return Values
