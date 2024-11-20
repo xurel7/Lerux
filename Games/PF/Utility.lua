@@ -111,7 +111,8 @@ function module.addESPtoModel(tbl: {[string]: any})
         OutlineColor = tbl["OutlineColor"],
         FillTransparency = tbl["FillTransparency"],
         OutlineTransparency = tbl["OutlineTransparency"],
-        Enabled = true
+        Enabled = true,
+        Name = tbl["Adornee"].Name
     })
     table.insert(components,hl)
   end
@@ -198,7 +199,16 @@ module.updateESP({
 function module.targetPlr(tbl: {string: any})
   local Fill = tbl["FOV"]:GetChildren()[1]
   local Outline = Fill.UIStroke
-  local Indicator = tbl["Folder"]:FindFirstChild(tbl["Target"].Name)
+  local Indicator
+  for i, v in ipairs(tbl["Folder"]:GetChildren()) do
+    if v.Name == tbl["Target"].Name and v:IsA("BillboardGui") then
+      Indicator = v
+      break
+    end
+  end
+  if not Indicator then
+      return
+  end
   if tbl["Targeted"] then
     TweenService:Create(Fill, TweenInfo1, { BackgroundColor3 = Color3.fromRGB(255, 138, 138) }):Play()
     TweenService:Create(Outline, TweenInfo1, { Color = Color3.fromRGB(255, 138, 138) }):Play()
