@@ -69,8 +69,37 @@ function module.new(inst: Instance, properties): Instance
   return instance
 end
 
+function module.plrAllied(Character: Model): boolean
+  if not Character then
+    return true
+  end
+  local HF = Character:FindFirstChildOfClass("Folder")
+  local H = HF and HF:FindFirstChildOfClass("MeshPart")
+  if not HF then
+    return true
+  end
+  if H.BrickColor == BrickColor.new("Black") then
+    return Teams.Phantoms == LocalPlayer.Team
+  end
+  return Teams.Ghosts == LocalPlayer.Team
+end
+
+function module.getBodypart(Character: Model, Bodypart: string): BasePart
+  local Target = Bodyparts[Bodypart] or Bodyparts["Head"]
+  for _, Part in ipairs(Character:GetChildren()) do
+    local SpecialMesh = Part:FindFirstChildOfClass("SpecialMesh")
+    if not SpecialMesh then
+        continue
+    end
+    if SpecialMesh.MeshId == Target then
+        return Part
+    end
+  end
+end
+
 function module.addESPtoModel(tbl: {[string]: any})
-  if tbl["Parent"]:FindFirstChild(tbl["Adornee"].Name) then
+  local isAlly = module.plrAllied(tbl["Adornee"])
+  if tbl["Parent"]:FindFirstChild(tbl["Adornee"].Name) or isAlly then
     return
   end
   local components = {}
@@ -195,33 +224,5 @@ module.targetPlr({
   ["FOVColor"] = Color3
 })
 ]]
-
-function module.plrAllied(Character: Model): boolean
-  if not Character then
-    return true
-  end
-  local HF = Character:FindFirstChildOfClass("Folder")
-  local H = HF and HF:FindFirstChildOfClass("MeshPart")
-  if not HF then
-    return true
-  end
-  if H.BrickColor == BrickColor.new("Black") then
-    return Teams.Phantoms == LocalPlayer.Team
-  end
-  return Teams.Ghosts == LocalPlayer.Team
-end
-
-function module.getBodypart(Character: Model, Bodypart: string): BasePart
-  local Target = Bodyparts[Bodypart] or Bodyparts["Head"]
-  for _, Part in ipairs(Character:GetChildren()) do
-    local SpecialMesh = Part:FindFirstChildOfClass("SpecialMesh")
-    if not SpecialMesh then
-        continue
-    end
-    if SpecialMesh.MeshId == Target then
-        return Part
-    end
-  end
-end
 
 return module
