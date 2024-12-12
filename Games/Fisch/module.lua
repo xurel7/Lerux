@@ -28,6 +28,7 @@ end)
 Character.ChildRemoved:Connect(function(child)
   if child == Rod then
       Rod = nil
+      GuiService.SelectedObject = nil
   end
 end)
 
