@@ -81,6 +81,10 @@ function module.reel(reelui: PlayerGui, method: string)
   until not reelui
 end
 
+function module.getRod()
+  return Rod
+end
+
 function module.shake(shakeui: PlayerGui)
   local Safezone = shakeui:WaitForChild("safezone",10)
   if not Safezone then
