@@ -73,7 +73,7 @@ function module.reel(reelui: PlayerGui, method: string)
 
   PlayerBar:GetPropertyChangedSignal("Position"):Wait()
   if method:lower() ~= "legit" then
-    ReelEnd:FireServer(math.random(95,100),true)
+    ReelEnd:FireServer(100,true)
     return
   end
   repeat task.wait()
